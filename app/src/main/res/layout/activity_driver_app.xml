@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="top"
+    android:background="@color/tan_background"
+    >
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Select one of these Services"
+        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingTop="25dp"
+        android:paddingBottom="40dp"
+
+
+        />
+
+    <TextView
+        android:id="@+id/Crane"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="Crane"
+        android:paddingBottom="40dp"
+        style="@style/CategoryStyle"
+        android:background="@color/crane"
+        android:onClick="NearestLocation"
+        />
+
+    <TextView
+        android:id="@+id/TierWorkShop"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="Tier WorkShop"
+        android:textSize="20sp"
+        android:paddingBottom="40dp"
+        android:background="@color/TierWorkShop"
+        style="@style/CategoryStyle"
+        android:onClick="NearestLocation"
+        />
+
+    <TextView
+        android:id="@+id/ElectricWorkShop"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="Electric WorkShop"
+        android:textSize="20sp"
+        android:paddingBottom="40dp"
+        style="@style/CategoryStyle"
+        android:background="@color/ElectricWorkShop"
+        android:onClick="NearestLocation"
+        />
+
+    <TextView
+        android:id="@+id/MechanicalWorkShop"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="Mechanical WorkShop"
+        android:textSize="20sp"
+        android:paddingBottom="40dp"
+        style="@style/CategoryStyle"
+        android:background="@color/MechanicalWorkShop"
+        android:onClick="NearestLocation"/>
+
+
+    <TextView
+        android:id="@+id/Garage"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="Garage"
+        android:textSize="20sp"
+        style="@style/CategoryStyle"
+        android:background="@color/Garage"
+        android:onClick="NearestLocation"
+      />
+
+
+</LinearLayout>

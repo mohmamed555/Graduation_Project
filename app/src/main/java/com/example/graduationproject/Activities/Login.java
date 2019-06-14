@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                         pass_login.getText().toString().trim().equals("123000789")){
 
                     startActivity(new Intent(Login.this, Admin.class));
-                    finish();
+
 
                 }else {
 

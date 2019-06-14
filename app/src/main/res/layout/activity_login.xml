@@ -1,37 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+
+    android:background="@drawable/background"
     android:layout_height="match_parent"
     tools:context=".Activities.Login">
 
+    <ProgressBar
+        android:id="@+id/progressOfLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
 
-        <EditText
-            android:id="@+id/enter_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/headertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver services"
+        android:textColor="@color/white"
+        android:fontFamily="@font/demi"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:textSize="@dimen/_22sdp"
+        />
+
+
+<LinearLayout
+    android:id="@+id/parentOfLogin"
+    android:layout_marginRight="@dimen/_15sdp"
+    android:layout_marginLeft="@dimen/_15sdp"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <EditText
+        android:id="@+id/enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/_10sdp"
+        android:inputType="textEmailAddress"
+        android:fontFamily="@font/demi"
+        android:hint="Enter your email "
+        android:textColorHint="#C4C4C4"
+        android:paddingLeft="@dimen/_20sdp"
+        android:textColor="@color/white"
+        android:background="@drawable/background_of_login_edittext"
+        android:layout_marginBottom="@dimen/_20sdp"
+        />
+
+    <EditText
+        android:hint="Enter your password "
+        android:fontFamily="@font/demi"
+        android:textColor="@color/white"
+        android:textColorHint="#C4C4C4"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_20sdp"
+        android:background="@drawable/background_of_login_edittext"
         android:id="@+id/enter_pass"
+        android:inputType="textPassword"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
+
     <Button
         android:id="@+id/login_btn"
+
+        android:background="@drawable/background_btn"
+        android:layout_gravity="center"
+
         android:text="Sign in"
+        android:textSize="@dimen/_13sdp"
+        android:fontFamily="@font/demi"
+        android:textColor="#2196F3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:text="Register"
+
+</LinearLayout>
+    <TextView
+        android:fontFamily="@font/demi"
+        android:textColor="@color/white"
+      android:padding="@dimen/_10sdp"
+        android:layout_alignParentBottom="true"
+        android:text="Sign up ?"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
 
 
-</LinearLayout>
+</RelativeLayout>

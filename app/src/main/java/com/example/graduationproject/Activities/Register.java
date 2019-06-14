@@ -1,5 +1,6 @@
 package com.example.graduationproject.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +9,12 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.graduationproject.R;
+import com.example.graduationproject.Utils.MyUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -23,18 +27,16 @@ public class Register extends AppCompatActivity {
     Button btn_register;
     FirebaseAuth auth;
 
+    LinearLayout parent ;
+    ProgressBar progressBar ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        definitions();
 
-        auth = FirebaseAuth.getInstance();
 
-        email_register = findViewById(R.id.enter_email_register);
-        pass_register = findViewById(R.id.enter_pass_register);
-        repass = findViewById(R.id.enter_repass);
-        btn_register = findViewById(R.id.to_login);
-        user_name = findViewById(R.id.enter_userName);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,41 +48,66 @@ public class Register extends AppCompatActivity {
 
     }
 
+    private void definitions(){
+
+        auth = FirebaseAuth.getInstance();
+
+        email_register = findViewById(R.id.enter_email_register);
+        pass_register = findViewById(R.id.enter_pass_register);
+        repass = findViewById(R.id.enter_repass);
+        btn_register = findViewById(R.id.to_login);
+        user_name = findViewById(R.id.enter_userName);
+
+        progressBar = findViewById(R.id.progressOfRejester);
+
+        parent = findViewById(R.id.parentOfRejester);
+
+
+    }
+
     private void register() {
 
-        String email = email_register.getText().toString();
-        String password = pass_register.getText().toString();
-        String repassword = repass.getText().toString();
+        String email = email_register.getText().toString().trim();
+        String password = pass_register.getText().toString().trim();
+        String repassword = repass.getText().toString().trim();
+        String userName = user_name.getText().toString().trim();
 
-        if (!email.equals("") && password.equals(repassword)) {
+        if (userName.equals("")){
+            user_name.setError("Required");
 
-            if (pass_register.length() < 6) {
-                pass_register.setError("كلمة السرر يجب أن تكون أكبر من 6 مدخلات");
-                repass.setError("كلمة السرر يجب أن تكون أكبر من 6 مدخلات");
-                pass_register.setHintTextColor(Color.RED);
-                repass.setHintTextColor(Color.RED);
 
-            }else {
 
-                actionOfLogin(email,password);
-            }
 
-        } else {
+        }else if(email.equals("")){
+            email_register.setError("Required");
 
-            pass_register.setError("من فضلك راجع كلمة السرر");
-            repass.setError("كلمة المرور غير متطابقه");
-            pass_register.setHintTextColor(Color.RED);
-            email_register.setHintTextColor(Color.RED);
-            repass.setHintTextColor(Color.RED);
+
+        }else if(password.equals("")){
+            pass_register.setError("Required");
+
+
+        }else if(password.length() < 6){
+            pass_register.setError("password should be more than 5 characters");
+
 
 
         }
+        else if(!password.equals(repassword)){
+            repass.setError("password is not equals re-password");
+
+        }else {
+            parent.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            actionOfLogin(email,password);
+        }
+
+
 
 
 
     }
 
-    private void actionOfLogin(String email , String password){
+    private void actionOfLogin(final String email , final String password){
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -88,19 +115,28 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "تمت عملية التسجيل بنجاح و عليك تفعيل البريد الألكتروني الخاص بك", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Register is Succeed", Toast.LENGTH_LONG).show();
+
+                            startActivity(new Intent( Register.this , Login.class));
+                            finish();
+
+                            MyUtils.mailforLogin= email ;
+                            MyUtils.passwordforLogin = password  ;
 
 
                         } else {
-                            email_register.setError("من فضلك أعد كتابة كلمة السرر بطريقه صحيحه");
-                            Toast.makeText(getApplicationContext(), "هذا البريد الألكتروني غير صحيح", Toast.LENGTH_LONG).show();
+
+                            parent.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            email_register.setError("please check your email ");
+
 
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Register.this, "Connection Field", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
             }
         });
 

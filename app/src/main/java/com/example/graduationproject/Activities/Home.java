@@ -5,17 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.graduationproject.R;
 import com.example.graduationproject.Utils.MyUtils;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Home extends AppCompatActivity {
 
-
+    long backPressedTime  ;
 
      RelativeLayout crane  , ecl , mec  , tier , garage   , aboutUs;
+
+     FirebaseAuth auth  ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +28,28 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         definitions();
         onClick();
+        remmeber();
+    }
 
+
+    private void remmeber (){
+
+        if(auth.getCurrentUser() == null){
+
+          startActivity(new Intent(Home.this, Login.class));
+          finish();
+
+
+        }else {
+
+
+        }
 
     }
 
     private void definitions(){
+        auth = FirebaseAuth.getInstance() ;
+
         crane = findViewById(R.id.craneParent);
         ecl = findViewById(R.id.electricParent);
         mec = findViewById(R.id.mechanicalParent);
@@ -91,4 +113,27 @@ public class Home extends AppCompatActivity {
 
     }
 
+    public void signOut(View view) {
+
+      auth.signOut();
+
+      startActivity(new Intent(Home.this , Login.class));
+      finish();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else {
+            Toast.makeText(this, "press again to exit ", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
+
 }
+

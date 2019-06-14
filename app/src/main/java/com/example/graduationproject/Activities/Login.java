@@ -16,9 +16,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationproject.R;
+import com.example.graduationproject.Utils.MyUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -37,27 +41,35 @@ public class Login extends AppCompatActivity {
 
     EditText email_login , pass_login ;
 
-    Button btn_login , btn_register;
+    Button btn_login ;
 
-    public static boolean admin = false ;
+    TextView btn_register , header  ;
+
+    LinearLayout parent  ;
+
+    ProgressBar progressBar ;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        definitions();
+        seadDataAuto();
+        onClick();
 
 
-        auth = FirebaseAuth.getInstance();
+
+    }
+
+    private void onClick (){
 
 
-
-
-        email_login = findViewById(R.id.enter_email);
-        pass_login = findViewById(R.id.enter_pass);
-
-
-        btn_login = findViewById(R.id.login_btn);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,13 +88,29 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        btn_register = findViewById(R.id.register_btn);
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, Register.class));
             }
         });
+
+
+    }
+
+    private void definitions(){
+        auth = FirebaseAuth.getInstance();
+        email_login = findViewById(R.id.enter_email);
+        pass_login = findViewById(R.id.enter_pass);
+        btn_register = findViewById(R.id.register_btn);
+        btn_login = findViewById(R.id.login_btn);
+
+        parent = findViewById(R.id.parentOfLogin);
+
+        progressBar = findViewById(R.id.progressOfLogin);
+
+        header = findViewById(R.id.headertext);
 
 
 
@@ -96,30 +124,60 @@ public class Login extends AppCompatActivity {
 
         if(account.length()> 0  && pass.length()>0) {
 
+               progressBar.setVisibility(View.VISIBLE);
+               parent.setVisibility(View.GONE);
+               header.setVisibility(View.GONE);
+            btn_register.setVisibility(View.GONE);
+
             auth.signInWithEmailAndPassword(account , pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()){
+
                         startActivity(new Intent(Login.this , Home.class));
                         finish();
+
+
+
                     }else {
-                        email_login.setError("من فضلك راجع بريدك الألكتروني");
-                        pass_login.setError("من فضلك راجع كلمة المرور");
-                        Toast.makeText(getApplicationContext(), "البريد الألكتروني أو كلمة المرور غير صحيح" , Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        parent.setVisibility(View.VISIBLE);
+                        header.setVisibility(View.VISIBLE);
+                        btn_register.setVisibility(View.VISIBLE);
+
+                        email_login.setError("please check your email ");
+                        pass_login.setError("please check your password");
+                        Toast.makeText(getApplicationContext(), "email or password is wrong ", Toast.LENGTH_LONG).show();
 
                     }
                 }
             });
 
         }else{
-            email_login.setError("من فضلم أدخل البريد الألكتروني");
-            pass_login.setError("من فضلم أدخل كلمة المرور");
+            email_login.setError("please enter your email ");
+            pass_login.setError("please enter your password");
             email_login.setHintTextColor(Color.RED);
             pass_login.setHintTextColor(Color.RED);
-            Toast.makeText(getApplicationContext(),"من فضلك أنهى الطلب بأكمله" ,Toast.LENGTH_LONG).show();
+
 
         }
+
+    }
+
+
+    private void  seadDataAuto(){
+
+
+        if(!MyUtils.mailforLogin.equals("")){
+            email_login.setText(MyUtils.mailforLogin);
+            pass_login.setText(MyUtils.passwordforLogin);
+
+
+
+        }
+
+
 
     }
 

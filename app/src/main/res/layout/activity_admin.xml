@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.Admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+<LinearLayout
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Enter name " />
+
+    <EditText
+        android:id="@+id/editlocationName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Enter location (example : naser city) " />
+
+    <EditText
+        android:id="@+id/editPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="phone"
+        android:hint="Enter Phone Number " />
+
+    <EditText
+        android:id="@+id/editMaps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Enter location for google maps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:text="select your category"
+
+        android:textSize="@dimen/_13sdp" />
+
+    <RadioGroup
+
+        android:id="@+id/radiogroup1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/craneBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Crane" />
+
+        <RadioButton
+            android:id="@+id/mechanicalBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Mechanical" />
+
+        <RadioButton
+            android:id="@+id/electricBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Electric" />
+
+        <RadioButton
+            android:id="@+id/tiersBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Tiers" />
+
+        <RadioButton
+            android:id="@+id/garageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Garage" />
+
+
+    </RadioGroup>
+
+    <Button
+        android:onClick="sendData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="add" />
+
+
+</LinearLayout>
+
+
+</RelativeLayout>

@@ -57,6 +57,7 @@
 
             <RelativeLayout
 
+                android:id="@+id/craneParent"
                 android:background="@color/white"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:layout_width="0dp"
@@ -90,7 +91,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-
+               android:id="@+id/mechanicalParent"
                 android:background="@color/white"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_width="0dp"
@@ -133,6 +134,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/electricParent"
                 android:background="@color/white"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:layout_width="0dp"
@@ -166,6 +168,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/tiersParent"
                 android:background="@color/white"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_width="0dp"
@@ -209,6 +212,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/garageParent"
                 android:background="@color/white"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:layout_width="0dp"
@@ -238,15 +242,39 @@
                     />
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/aboutParent"
                 android:background="@color/white"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+
                 android:layout_height="@dimen/_100sdp">
 
+                <ImageView
+                    android:id="@+id/img6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/about"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    />
 
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/demi"
+                    android:text="About us"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_below="@+id/img6"
+                    android:layout_centerHorizontal="true" />
+
+
+
+
+            </RelativeLayout>
 
 
         </LinearLayout>

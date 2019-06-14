@@ -3,12 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="tan_background">#FFF7DA</color>
-    <color name="crane">#FD8E09</color>
-    <color name="TierWorkShop">#379237</color>
-    <color name="ElectricWorkShop">#8800A0</color>
 
 
+    <color name="background">#2196F3</color>
     <color name="black">#000</color>
     <color name="white">#ffffff</color>
     <color name="gray">#E4E4E4</color>

@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (email_login.getText().toString().trim().equals("admin123@gmail.com") &&
+                if (email_login.getText().toString().trim().equals("admin@gmail.com") &&
                         pass_login.getText().toString().trim().equals("123000789")){
 
                     startActivity(new Intent(Login.this, Admin.class));
